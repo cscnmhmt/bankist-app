@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Bankist app</title>
+    <link rel="stylesheet" href="style/style.css" />
+    <script defer src="app/app.js"></script>
+    <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon" />
+  </head>
+  <body>
+    <!-- logo -->
+    <div id="logo">
+      <img class="logo-img" src="assets/logo.png" alt="" />
+      <h3>BANKIST</h3>
+    </div>
+    <!-- login screen -->
+    <div id="login">
+      <div class="banner">
+        <img src="assets/login-banner.svg" alt="" />
+      </div>
+      <div class="login-form-sec">
+        <form class="login-form">
+          <h2>Welcome back to Bankist!</h2>
+          <h4>Login to your account</h4>
+          <label class="form-label" for="username">Username</label>
+          <input
+            class="input"
+            type="text"
+            name="username"
+            id="username"
+            placeholder="js"
+          />
+          <label class="form-label" for="password">Password</label>
+          <input
+            class="input"
+            type="password"
+            name="password"
+            id="password"
+            placeholder="1111"
+          />
+          <label for="remember" class="form-label remember-label">
+            <input type="checkbox" name="remember" id="remember" />
+            Remember me!</label
+          >
+          <button class="btn login-btn" type="submit">Login</button>
+        </form>
+        <div class="login-with">
+          <h4>Or login with</h4>
+          <img src="assets/icons-facebook.svg" alt="" />
+          <img src="assets/icons-google.svg" alt="" />
+        </div>
+      </div>
+    </div>
+    <!-- main app -->
+    <div id="app">
+      <header class="primary-header">
+        <div class="welcome">Welcome, <strong>Mehmet</strong></div>
+      </header>
+      <main class="app-body"></main>
+    </div>
+  </body>
+</html>

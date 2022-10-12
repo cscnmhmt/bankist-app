@@ -1,0 +1,318 @@
+/*
+    RESET CSS
+  made by cscn ==> cscn.dev
+  inspired by elly loel
+  *** :where() is used to lower specifity for easy overriding
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
+
+:root {
+  /* colors */
+  --white: hsl(0, 0%, 98%);
+  --black: hsl(0, 0%, 8%);
+  --cl-primary-900: hsl(256, 100%, 16%);
+  --cl-primary-700: hsl(273, 100%, 22%);
+  --cl-primary-500: hsl(279, 100%, 29%);
+  --cl-primary-300: hsl(279, 49%, 57%);
+  --cl-primary-100: hsla(279, 58%, 72%, 0.07);
+  /* fonts */
+  --inter: "Inter", sans-serif;
+  --fs-small: 0.9rem;
+  --fs-regular: 1rem;
+  --fs-large: 1.5rem;
+  --fs-xlarge: 2rem;
+  --fw-normal: 400;
+  --fw-semi-bold: 500;
+  --fw-bold: 700;
+  /* box shadows */
+  --box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  /* border */
+  --border: 1px solid hsl(0, 0%, 90%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  line-height: calc(0.25em + 1em + 0.25em);
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+/* remove border and set sensible defaults for backgrounds, on all elements except fieldset, progress and meter */
+*:where(:not(fieldset, progress, meter)) {
+  border-width: 0;
+  border-style: solid;
+  background-origin: border-box;
+  background-repeat: no-repeat;
+}
+
+html {
+  block-size: 100%;
+  /* making sure text size only controlled by font-size */
+  -webkit-text-size-adjust: none;
+}
+
+@media (prefers-reduce-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  /* improve text rendering */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeSpeed;
+  min-block-size: 100%;
+  font-family: var(--inter);
+  position: relative;
+}
+
+:where(img, svg, video, canvas, audio, iframe, embed, object) {
+  display: block;
+}
+
+:where(img, svg, video) {
+  block-size: auto;
+  max-inline-size: 100%;
+}
+
+:where(svg):where(:not([fill])) {
+  stroke: currentColor;
+  fill: none;
+  /* rounded stroke */
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* change textarea resize to vertical only */
+:where(textarea) {
+  resize: vertical;
+}
+@supports (resize: block) {
+  :where(textarea) {
+    resize: block;
+  }
+}
+
+:where(p, h1, h2, h3, h4, h5, h6) {
+  overflow-wrap: break-word;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+a {
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+a:hover {
+  color: inherit;
+}
+
+:where(ul, ol)[role="list"] {
+  list-style: none;
+}
+
+:where(a, area, button, select) {
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+/* make sure user cant select button text */
+:where(button, input[type="button"], input[type="submit"], input[type="reset"]),
+:where(input[type="file"])::-webkit-file-upload-button,
+:where(input[type="file"])::file-selector-button {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+:where(button, input[type="button"], input[type="submit"], input[type="reset"])[disabled] {
+  cursor: not-allowed;
+}
+
+/* input autocomplete style (this is optional) */
+/* :where(input, textarea):-webkit-autofill,
+:where(input, textarea):-webkit-autofill:hover,
+:where(input, textarea):-webkit-autofill:focus {
+  border: 1px solid black;
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0 1000px white inset;
+  transition: background-color 5000s ease-in-out 0s;
+} */
+
+/* utility-class */
+
+.btn {
+  background-color: transparent;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  padding: 0.75rem;
+  font-size: var(--fs-regular);
+  box-shadow: var(--box-shadow);
+}
+
+.input {
+  box-shadow: var(--box-shadow);
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-size: var(--fs-regular);
+  margin-block: 0.5rem;
+}
+
+.input:focus {
+  outline: 2px solid var(--cl-primary-500);
+}
+
+/* logo */
+
+#logo {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}
+
+#logo .logo-img {
+  width: 40px;
+}
+
+#logo h3 {
+  color: var(--cl-primary-500);
+  opacity: 0.7;
+  letter-spacing: 1px;
+  font-weight: var(--fw-bold);
+}
+
+/* LOGIN SCREEN */
+
+#login {
+  background-color: var(--white);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100vh;
+  color: var(--black);
+  transition: 0.3s;
+}
+
+#login .login-form-sec {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#login .banner {
+  background-color: var(--cl-primary-100);
+  display: grid;
+  place-items: center;
+}
+
+#login .banner img {
+  width: 85%;
+}
+
+#login .login-form {
+  background-color: var(--white);
+  width: 580px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  padding: 2rem 1.8rem;
+  gap: 0.5rem;
+}
+
+.login-form h2 {
+  font-size: var(--fs-xlarge);
+  font-weight: var(--fw-bold);
+}
+
+.login-form h4 {
+  color: var(--cl-primary-300);
+  font-size: var(--fs-regular);
+  font-weight: var(--fw-semi-bold);
+  letter-spacing: 0.2px;
+  opacity: 0.9;
+  margin-bottom: 2rem;
+}
+
+.form-label {
+  font-size: var(--fs-regular);
+  font-weight: var(--fw-semi-bold);
+  user-select: none;
+}
+
+.remember-label {
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semi-bold);
+  letter-spacing: 0.2px;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+#remember {
+  opacity: 0.6;
+}
+
+.login-btn {
+  margin-top: 1rem;
+  background-color: var(--cl-primary-500);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-regular);
+  letter-spacing: 0.25px;
+  color: var(--white);
+  border-radius: 50px;
+  padding-block: 1rem;
+  width: 200px;
+  cursor: pointer;
+  transition: 0.1s;
+  box-shadow: rgb(96, 0, 148, 0.45) 0px 48px 100px 0px;
+}
+.login-btn:hover {
+  background-color: var(--cl-primary-700);
+}
+
+.login-with {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  width: 580px;
+  padding: 2rem;
+}
+
+.login-with h4 {
+  color: var(--cl-primary-300);
+  font-size: var(--fs-regular);
+  font-weight: var(--fw-semi-bold);
+  letter-spacing: 0.2px;
+  opacity: 0.9;
+}
+
+.login-with img {
+  width: 45px;
+  height: 45px;
+  padding: 0.3rem;
+  border: 1px solid rgba(152, 152, 152, 0.51);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* APP */
+
+#app {
+  display: none;
+  place-items: center;
+  transition: 0.3s;
+}
