@@ -54,9 +54,74 @@
     <!-- main app -->
     <div id="app">
       <header class="primary-header">
-        <div class="welcome">Welcome, <strong>Mehmet</strong></div>
+        <div class="welcome">Welcome back, <strong>Mehmet</strong></div>
+        <div class="date">03.24.2020 - 10.43 AM</div>
+        <div class="logout-time">
+          You will be logged out in <strong id="logout-in">05.49</strong>
+        </div>
       </header>
-      <main class="app-body"></main>
+      <main class="app-body">
+        <div class="app-card account-details">
+          <div class="acc-label current-balance">
+            <h3>CURRENT BALANCE</h3>
+            <div class="balance">3000.00 €</div>
+          </div>
+          <div class="acc-label income-label">
+            <h3>INCOME</h3>
+            <div class="income-value">4000.20 €</div>
+          </div>
+          <div class="acc-label outcome-label">
+            <h3>OUTCOME</h3>
+            <div class="outcome-value">-300.00 €</div>
+          </div>
+          <div class="acc-label interest-label">
+            <h3>INTEREST</h3>
+            <div class="interest-value">130.00</div>
+          </div>
+        </div>
+        <div class="app-card summary">
+          <h2>Movements</h2>
+          <div class="movement movement-deposit">
+            <header>
+              <h4 class="movement-type">2. DEPOSIT</h4>
+              <p class="movement-date">3 days ago</p>
+            </header>
+            <div class="movement-value">3000 €</div>
+          </div>
+          <div class="movement movement-withdraw">
+            <header>
+              <h4 class="movement-type">1. WITHDRAW</h4>
+              <p class="movement-date">14 days ago</p>
+            </header>
+            <div class="movement-value">-400 €</div>
+          </div>
+        </div>
+        <div class="app-card actions">
+          <div class="action-form transfer-money">
+            <h3>Transfer money</h3>
+            <form class="transfer-form">
+              <input type="text" placeholder="Transfer-to" />
+              <input type="number" placeholder="Amount" />
+              <button class="btn" type="submit">Send</button>
+            </form>
+          </div>
+          <div class="action-form request-loan">
+            <h3>Request loan</h3>
+            <form class="request-loan-form">
+              <input type="number" placeholder="Amount" />
+              <button class="btn" type="submit">Request</button>
+            </form>
+          </div>
+          <div class="action-form close-account">
+            <h3>Close Account</h3>
+            <form class="close-accout-form">
+              <input type="text" placeholder="Username" />
+              <input type="password" placeholder="Password" />
+              <button class="btn" type="submit">Close account</button>
+            </form>
+          </div>
+        </div>
+      </main>
     </div>
   </body>
 </html>
