@@ -1,18 +1,20 @@
 "use strict";
-
+// ELEMENTS
 const loginBtn = document.querySelector(".login-btn");
-const app = document.getElementById("app");
 const loginScreen = document.getElementById("login");
+const inputLoginUsername = document.getElementById("username");
+const inputLoginPin = document.getElementById("password");
 
-loginBtn.addEventListener("click", displayApp);
+const labelWelcome = document.querySelector(".welcome");
+const labelDate = document.querySelector(".date");
+const labelBalance = document.querySelector(".balance");
+const labelSumIn = document.querySelector(".income-value");
+const labelSumOut = document.querySelector(".outcome-value");
+const labelSumInterest = document.querySelector(".interest-value");
+const labelTimer = document.querySelector(".logout-in");
 
-function displayApp(e) {
-  e.preventDefault();
-  loginScreen.style.display = "none";
-  setTimeout(() => {
-    app.style.display = "flex";
-  }, 500);
-}
+const containerApp = document.querySelector("#app");
+const containerMovements = document.querySelector(".movements");
 
 // APP
 ///////////////////////////////
@@ -48,3 +50,109 @@ const account4 = {
 };
 
 const accounts = [account1, account2, account3, account4];
+
+// creating usernames with map method
+const createUsername = function (accs) {
+  accs.forEach((acc) => {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(" ")
+      .map((name) => name[0])
+      .join("");
+  });
+};
+createUsername(accounts);
+
+const updateUI = function (acc) {
+  displayMovements(acc.movements);
+  calcDisplayBalance(acc);
+  calcDisplaySummary(acc);
+};
+
+// display movements in movements container with foreachs
+const displayMovements = function (movements) {
+  movements.forEach((mov, i) => {
+    let movementType = mov > 0 ? "deposit" : "withdraw";
+
+    let movement = `
+      <div class="movement movement-${movementType}">
+        <header>
+          <h4 class="movement-type">${i + 1}. ${movementType}</h4>
+          <p class="movement-date">3 days ago</p>
+        </header>
+        <div class="movement-value">${mov} €</div>
+      </div>
+    `;
+    containerMovements.insertAdjacentHTML("afterbegin", movement);
+  });
+};
+
+// calc balance with reduce method
+const calcDisplayBalance = function (acc) {
+  acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${acc.balance} €`;
+};
+
+// chainging array methods and display summary
+const calcDisplaySummary = function (acc) {
+  // calculating income
+  const income = acc.movements
+    .filter((mov) => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumIn.textContent = `${income} €`;
+
+  // calculating outcome;
+  const outcome = acc.movements
+    .filter((mov) => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumOut.textContent = `${Math.abs(outcome)} €`;
+
+  // calculating interest
+  const interests = acc.movements
+    .filter((mov) => mov > 0)
+    .map((deposit) => (deposit * acc.interestRate) / 100)
+    .reduce((acc, int) => acc + int, 0);
+  labelSumInterest.textContent = `${interests}`;
+};
+
+function padTo2Digits(num) {
+  return String(num).padStart(2, "0");
+}
+
+// implementing login logic with using find method
+let currentAccount;
+
+loginBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  currentAccount = accounts.find(
+    (acc) => acc.username === inputLoginUsername.value
+  );
+
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    // displaying current date
+    const date = new Date();
+    labelDate.textContent = `${padTo2Digits(date.getDate())}.${padTo2Digits(
+      date.getMonth() + 1
+    )}.${date.getFullYear()} ${padTo2Digits(date.getHours())}:${padTo2Digits(
+      date.getMinutes()
+    )}`;
+
+    // displaying welcome message
+    labelWelcome.innerHTML = `Welcome back, <strong>${
+      currentAccount.owner.split(" ")[0]
+    }</strong>`;
+
+    // displaying the app and hiding login form
+    loginScreen.style.display = "none";
+    setTimeout(() => {
+      app.style.display = "flex";
+    }, 500);
+
+    // update ui for the current account
+    updateUI(currentAccount);
+  } else {
+    inputLoginPin.classList.add("wrong");
+    inputLoginUsername.classList.add("wrong");
+  }
+});
