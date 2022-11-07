@@ -36,6 +36,7 @@
     hsla(353, 82%, 56%, 0.1),
     hsla(8, 89%, 61%, 0.15)
   );
+  --cl-error: hsl(354, 80%, 48%);
   --cl-red: hsl(354, 100%, 50%);
   --cl-yellow: rgb(73, 168, 69);
   --bg-red: hsla(354, 100%, 50%, 0.09);
@@ -199,6 +200,10 @@ a:hover {
 
 .input:focus {
   outline: 2px solid var(--cl-primary-500);
+}
+
+.input.wrong {
+  outline: 2px solid var(--cl-error);
 }
 
 /* logo */
@@ -465,6 +470,12 @@ a:hover {
   margin-left: 1rem;
 }
 
+.movements {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .movement {
   height: auto;
   display: flex;
@@ -488,6 +499,7 @@ a:hover {
 .movement-type {
   font-size: var(--fs-xsmall);
   font-weight: var(--fw-bold);
+  text-transform: uppercase;
   padding: 0.2rem 0.9rem;
   border-radius: 50px;
   border: 2px solid;
@@ -534,6 +546,7 @@ a:hover {
 }
 
 .action-form input {
+  width: 100%;
   grid-area: 1;
   outline: none;
   padding: 0.5rem 1rem;
