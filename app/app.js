@@ -10,6 +10,7 @@ const labelSumIn = document.querySelector('.income-value');
 const labelSumOut = document.querySelector('.outcome-value');
 const labelSumInterest = document.querySelector('.interest-value');
 const labelTimer = document.querySelector('.logout-in');
+const btnLogout = document.getElementById('logout-btn');
 
 const loginBtn = document.querySelector('.login-btn');
 const loginScreen = document.getElementById('login');
@@ -61,6 +62,24 @@ const account4 = {
 };
 
 const accounts = [account1, account2, account3, account4];
+
+// pad a number with leading 0
+function padTo2Digits(num) {
+  return String(num).padStart(2, '0');
+}
+
+// clear login inputs
+function clearLoginInputs() {
+  inputLoginUsername.value = inputLoginPin.value = '';
+}
+
+function logOut() {
+  app.style.display = 'none';
+  setTimeout(() => {
+    loginScreen.style.display = 'grid';
+  }, 500);
+  clearLoginInputs();
+}
 
 // creating usernames with map method
 const createUsername = function (accs) {
@@ -126,10 +145,6 @@ const calcDisplaySummary = function (acc) {
   labelSumInterest.textContent = `${interests}`;
 };
 
-function padTo2Digits(num) {
-  return String(num).padStart(2, '0');
-}
-
 // implementing login logic with using find method
 let currentAccount;
 
@@ -191,3 +206,22 @@ btnTransfer.addEventListener('click', (e) => {
 });
 
 // implementing close account logic
+btnCloseAcc.addEventListener('click', (e) => {
+  e.preventDefault();
+  if (
+    currentAccount.username === inputCloseAccUsername.value &&
+    currentAccount.pin === Number(inputCloseAccPin.value)
+  ) {
+    const index = accounts.findIndex(
+      (acc) => acc.username === currentAccount.username
+    );
+
+    accounts.splice(index, 1);
+    logOut();
+  }
+});
+
+btnLogout.addEventListener('click', (e) => {
+  e.preventDefault();
+  logOut();
+});

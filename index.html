@@ -56,6 +56,7 @@
     <div id="app">
       <header class="primary-header">
         <div class="welcome"></div>
+        <span id="logout-btn">Logout</span>
         <div class="date">03.24.2020 - 10.43 AM</div>
         <div class="logout-time">
           You will be logged out in <strong id="logout-in">05.49</strong>
@@ -92,6 +93,7 @@
                 type="text"
                 id="transfer-to-input"
                 placeholder="Transfer-to"
+                autocomplete="off"
               />
               <input type="number" id="transfer-amount" placeholder="Amount" />
               <button class="btn" id="transfer-btn" type="submit">Send</button>
@@ -104,6 +106,7 @@
                 type="number"
                 id="request-loan-input"
                 placeholder="Amount"
+                autocomplete="off"
               />
               <button class="btn" id="request-btn" type="submit">
                 Request
@@ -117,6 +120,7 @@
                 type="text"
                 id="close-account-input"
                 placeholder="Username"
+                autocomplete="off"
               />
               <input
                 type="password"

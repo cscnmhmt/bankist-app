@@ -228,7 +228,7 @@
   place-items: center;
   transition: 0.3s;
   position: relative;
-  padding: 6rem 1rem 1rem 1rem;
+  padding: 7rem 1rem 1rem 1rem;
 }
 
 .welcome {
@@ -240,6 +240,25 @@
 
 .welcome strong {
   color: var(--cl-primary-500);
+}
+
+#logout-btn {
+  position: absolute;
+  right: 1rem;
+  top: 4rem;
+  background-color: transparent;
+  color: var(--cl-primary-700);
+  font-size: var(--fs-regular);
+  font-weight: var(--fw-bold);
+  border-radius: 6px;
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+  z-index: 999;
+}
+
+#logout-btn:hover {
+  text-decoration: underline;
+  background-color: var(--cl-primary-100);
 }
 
 .logout-time,
