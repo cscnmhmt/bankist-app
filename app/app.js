@@ -1,20 +1,31 @@
-"use strict";
+'use strict';
 // ELEMENTS
-const loginBtn = document.querySelector(".login-btn");
-const loginScreen = document.getElementById("login");
-const inputLoginUsername = document.getElementById("username");
-const inputLoginPin = document.getElementById("password");
+const containerApp = document.querySelector('#app');
+const containerMovements = document.querySelector('.movements');
 
-const labelWelcome = document.querySelector(".welcome");
-const labelDate = document.querySelector(".date");
-const labelBalance = document.querySelector(".balance");
-const labelSumIn = document.querySelector(".income-value");
-const labelSumOut = document.querySelector(".outcome-value");
-const labelSumInterest = document.querySelector(".interest-value");
-const labelTimer = document.querySelector(".logout-in");
+const labelWelcome = document.querySelector('.welcome');
+const labelDate = document.querySelector('.date');
+const labelBalance = document.querySelector('.balance');
+const labelSumIn = document.querySelector('.income-value');
+const labelSumOut = document.querySelector('.outcome-value');
+const labelSumInterest = document.querySelector('.interest-value');
+const labelTimer = document.querySelector('.logout-in');
 
-const containerApp = document.querySelector("#app");
-const containerMovements = document.querySelector(".movements");
+const loginBtn = document.querySelector('.login-btn');
+const loginScreen = document.getElementById('login');
+const inputLoginUsername = document.getElementById('username');
+const inputLoginPin = document.getElementById('password');
+
+const inputTransferTo = document.getElementById('transfer-to-input');
+const inputTransferAmount = document.getElementById('transfer-amount');
+const btnTransfer = document.getElementById('transfer-btn');
+
+const inputReqLoan = document.getElementById('request-loan-input');
+const btnReqLoan = document.getElementById('request-btn');
+
+const inputCloseAccUsername = document.getElementById('close-account-input');
+const inputCloseAccPin = document.getElementById('close-account-pass-input');
+const btnCloseAcc = document.getElementById('close-account-btn');
 
 // APP
 ///////////////////////////////
@@ -22,28 +33,28 @@ const containerMovements = document.querySelector(".movements");
 // Data
 
 const account1 = {
-  owner: "Jonas Schmedtmann",
+  owner: 'Jonas Schmedtmann',
   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
   interestRate: 1.2, // %
   pin: 1111,
 };
 
 const account2 = {
-  owner: "Jessica Davis",
+  owner: 'Jessica Davis',
   movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
   interestRate: 1.5,
   pin: 2222,
 };
 
 const account3 = {
-  owner: "Steven Thomas Williams",
+  owner: 'Steven Thomas Williams',
   movements: [200, -200, 340, -300, -20, 50, 400, -460],
   interestRate: 0.7,
   pin: 3333,
 };
 
 const account4 = {
-  owner: "Sarah Smith",
+  owner: 'Sarah Smith',
   movements: [430, 1000, 700, 50, 90],
   interestRate: 1,
   pin: 4444,
@@ -56,9 +67,9 @@ const createUsername = function (accs) {
   accs.forEach((acc) => {
     acc.username = acc.owner
       .toLowerCase()
-      .split(" ")
+      .split(' ')
       .map((name) => name[0])
-      .join("");
+      .join('');
   });
 };
 createUsername(accounts);
@@ -72,7 +83,7 @@ const updateUI = function (acc) {
 // display movements in movements container with foreachs
 const displayMovements = function (movements) {
   movements.forEach((mov, i) => {
-    let movementType = mov > 0 ? "deposit" : "withdraw";
+    let movementType = mov > 0 ? 'deposit' : 'withdraw';
 
     let movement = `
       <div class="movement movement-${movementType}">
@@ -83,7 +94,7 @@ const displayMovements = function (movements) {
         <div class="movement-value">${mov} €</div>
       </div>
     `;
-    containerMovements.insertAdjacentHTML("afterbegin", movement);
+    containerMovements.insertAdjacentHTML('afterbegin', movement);
   });
 };
 
@@ -116,13 +127,13 @@ const calcDisplaySummary = function (acc) {
 };
 
 function padTo2Digits(num) {
-  return String(num).padStart(2, "0");
+  return String(num).padStart(2, '0');
 }
 
 // implementing login logic with using find method
 let currentAccount;
 
-loginBtn.addEventListener("click", (e) => {
+loginBtn.addEventListener('click', (e) => {
   e.preventDefault();
 
   currentAccount = accounts.find(
@@ -140,19 +151,43 @@ loginBtn.addEventListener("click", (e) => {
 
     // displaying welcome message
     labelWelcome.innerHTML = `Welcome back, <strong>${
-      currentAccount.owner.split(" ")[0]
+      currentAccount.owner.split(' ')[0]
     }</strong>`;
 
     // displaying the app and hiding login form
-    loginScreen.style.display = "none";
+    loginScreen.style.display = 'none';
     setTimeout(() => {
-      app.style.display = "flex";
+      app.style.display = 'flex';
     }, 500);
 
     // update ui for the current account
     updateUI(currentAccount);
   } else {
-    inputLoginPin.classList.add("wrong");
-    inputLoginUsername.classList.add("wrong");
+    inputLoginPin.classList.add('wrong');
+    inputLoginUsername.classList.add('wrong');
   }
 });
+
+// implementing transfer money logic
+btnTransfer.addEventListener('click', (e) => {
+  e.preventDefault();
+  const amount = Number(inputTransferAmount.value);
+  const receiverAcc = accounts.find(
+    (acc) => acc.username === inputTransferTo.value
+  );
+
+  inputTransferAmount.value = inputTransferTo.value = '';
+
+  if (
+    amount > 0 &&
+    receiverAcc &&
+    currentAccount.balance >= amount &&
+    receiverAcc.username !== currentAccount.username
+  ) {
+    currentAccount.movements.push(-amount);
+    receiverAcc.movements.push(amount);
+    updateUI(currentAccount);
+  }
+});
+
+// implementing close account logic

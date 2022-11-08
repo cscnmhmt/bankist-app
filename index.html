@@ -65,7 +65,7 @@
         <div class="app-card account-details">
           <div class="acc-label current-balance">
             <h3>CURRENT BALANCE</h3>
-            <div class="balance">3000.00 €</div>
+            <div class="balance"></div>
           </div>
           <div class="acc-label income-label">
             <h3>INCOME</h3>
@@ -77,7 +77,7 @@
           </div>
           <div class="acc-label interest-label">
             <h3>INTEREST</h3>
-            <div class="interest-value">130.00</div>
+            <div class="interest-value"></div>
           </div>
         </div>
         <div class="app-card summary">
@@ -88,24 +88,44 @@
           <div class="action-form transfer-money">
             <h3>Transfer money</h3>
             <form class="transfer-form">
-              <input type="text" placeholder="Transfer-to" />
-              <input type="number" placeholder="Amount" />
-              <button class="btn" type="submit">Send</button>
+              <input
+                type="text"
+                id="transfer-to-input"
+                placeholder="Transfer-to"
+              />
+              <input type="number" id="transfer-amount" placeholder="Amount" />
+              <button class="btn" id="transfer-btn" type="submit">Send</button>
             </form>
           </div>
           <div class="action-form request-loan">
             <h3>Request loan</h3>
             <form class="request-loan-form">
-              <input type="number" placeholder="Amount" />
-              <button class="btn" type="submit">Request</button>
+              <input
+                type="number"
+                id="request-loan-input"
+                placeholder="Amount"
+              />
+              <button class="btn" id="request-btn" type="submit">
+                Request
+              </button>
             </form>
           </div>
           <div class="action-form close-account">
             <h3>Close Account</h3>
             <form class="close-accout-form">
-              <input type="text" placeholder="Username" />
-              <input type="password" placeholder="Password" />
-              <button class="btn" type="submit">Close account</button>
+              <input
+                type="text"
+                id="close-account-input"
+                placeholder="Username"
+              />
+              <input
+                type="password"
+                id="close-account-pass-input"
+                placeholder="Password"
+              />
+              <button class="btn" id="close-account-btn" type="submit">
+                Close account
+              </button>
             </form>
           </div>
         </div>
