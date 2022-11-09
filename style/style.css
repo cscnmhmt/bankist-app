@@ -37,6 +37,7 @@
   --bg-green: hsla(118, 68%, 59%, 0.09);
   --bg-yellow: hsla(44, 100%, 49%, 0.25);
   --bg-blue: hsla(206, 68%, 67%, 0.25);
+  --alert-red: hsl(354, 94%, 79%);
   /* fonts */
   --inter: 'Inter', sans-serif;
   --fs-xsmall: 0.75rem;
@@ -500,4 +501,27 @@
 
 .action-form.close-account button {
   background: var(--bg-red);
+}
+
+#alerts {
+  width: 100%;
+  position: absolute;
+  bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.alert {
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  background-color: var(--alert-red);
+  color: var(--black);
+  font-weight: var(--fw-semi-bold);
+  transform: translateY(500px);
+  transition: 1s;
+}
+
+.alert.show {
+  transform: translateY(0);
 }

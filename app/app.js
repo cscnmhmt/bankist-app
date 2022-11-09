@@ -28,6 +28,7 @@ const inputCloseAccUsername = document.getElementById('close-account-input');
 const inputCloseAccPin = document.getElementById('close-account-pass-input');
 const btnCloseAcc = document.getElementById('close-account-btn');
 
+const alert = document.querySelector('.alert');
 // APP
 ///////////////////////////////
 ///////////////////////////////
@@ -73,12 +74,21 @@ function clearLoginInputs() {
   inputLoginUsername.value = inputLoginPin.value = '';
 }
 
+// log out function
 function logOut() {
   app.style.display = 'none';
   setTimeout(() => {
     loginScreen.style.display = 'grid';
   }, 500);
   clearLoginInputs();
+}
+
+// show alert func
+function showAlert() {
+  alert.classList.add('show');
+  setTimeout(() => {
+    alert.classList.remove('show');
+  }, 3500);
 }
 
 // creating usernames with map method
@@ -215,12 +225,14 @@ btnCloseAcc.addEventListener('click', (e) => {
     const index = accounts.findIndex(
       (acc) => acc.username === currentAccount.username
     );
-
+    inputCloseAccUsername.value = inputCloseAccPin.value = '';
     accounts.splice(index, 1);
     logOut();
+    showAlert();
   }
 });
 
+// logout btn event
 btnLogout.addEventListener('click', (e) => {
   e.preventDefault();
   logOut();
