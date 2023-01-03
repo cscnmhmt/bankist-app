@@ -1,6 +1,13 @@
 # Bankist App
 Simple javascript app using arrays 
 
+## Old design
+![This is an image](/assets/screenshots/olddesign.png)
+
+## New designes
+![This is an image](/assets/screenshots/bankistloginscreen.jfif)
+![This is an image](/assets/screenshots/bankistappscreen.png)
+
 ## Features
 - Simple login screen
   - Users 
